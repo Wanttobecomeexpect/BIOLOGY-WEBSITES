@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biology Book Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #388e3c;
+            --text-color: #333;
+            --light-text: #ffffff;
+            --hover-text: #b8eca9;
+            --bg-color: #edebeb;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(102, 234, 76, 0.601);
+            --secondary-shadow: 0px 3px 12px 2px rgba(97, 216, 74, 0.508);
+            --hover-shadow: 0px 9px 16px rgba(97, 216, 74, 0.508);
+            --border-radius: 20px;
+            --secondary-border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hover-text);
+        }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 32px;
+        }
+
+        .b {
+            width: 890px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .bb {
+            gap: 16px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .b1,
+        .b2 {
+            width: 445px;
+            padding: 8px;
+            background: var(--card-bg);
+            border-radius: var(--secondary-border-radius);
+            box-shadow: var(--secondary-shadow);
+            transition: 0.5s ease-in-out 0s;
+        }
+
+        .b1:hover,
+        .b2:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: var(--primary-color);
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Biology Book</h1>
+        <p>Your gateway to the world of life sciences</p>
+    </header>
+    <nav>
+        <a href="http://Class11th.kesug.com/index.html">Home</a>
+        <a href="biology.html">EBook</a>
+        <a href="chlist.html">Chapters</a>
+        <a href="bques.html">Questions</a>
+        <a href="bsupplies.html">Resources</a>
+    </nav>
+    <main>
+        <h2>Welcome to the Biology Book</h2>
+        <p>
+            Explore the fascinating world of biology! Browse through chapters, learn key concepts, and discover the
+            wonders of life.
+        </p>
+        <section class="b">
+            <h1>Biology</h1>
+            <p><b>"Biology"</b>, It is made of two words <i>"Bio"</i>and<i>"logy"</i> , Where <i>"bio"</i> means
+                <i>Nature or living Orgnisms</i> and <i>"logy"</i> means <i>Knowledge</i>.
+            </p>
+        </section>
+        <div class="bb">
+            <section class="b b1">
+                <h1>Botany</h1>
+                <p><b>"Botany"</b>, It is the branch of biology that deals with the study of plants.</p>
+            </section>
+            <section class="b b2">
+                <h1>Zoology</h1>
+                <p><b>"Zoology"</b>, It is the branch of biology that deals with the study of animals.</p>
+            </section>
+        </div>
+
+    </main>
+    <footer>
+        &copy; 2025 Biology Book.
+    </footer>
+</body>
+
+</html>

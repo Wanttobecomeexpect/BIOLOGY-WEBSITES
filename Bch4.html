@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morphology of Flowering Plants</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #388e3c;
+            --text-color: #333;
+            --light-text: #ffffff;
+            --hover-text: #b8eca9;
+            --bg-color: #edebeb;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(102, 234, 76, 0.601);
+            --secondary-shadow: 0px 3px 12px 2px rgba(97, 216, 74, 0.508);
+            --hover-shadow: 0px 9px 16px rgba(97, 216, 74, 0.508);
+            --border-radius: 20px;
+            --secondary-border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hover-text);
+        }
+
+        /* Chapter-specific styles */
+        .chapter-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            gap: 2rem;
+        }
+
+        .chapter-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 10px;
+            align-self: flex-start;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .chapter-sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+
+        .chapter-topics {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-topics li {
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-topics a {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-topics a:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        .chapter-topics a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-resources {
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .sidebar-resources h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-resources ul {
+            list-style: none;
+        }
+
+        .sidebar-resources li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-resources a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .sidebar-resources a:hover {
+            color: var(--primary-color);
+        }
+
+        .chapter-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .chapter-content p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            color: var(--text-color);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav span {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .chapter-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chapter-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .chapter-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .taxon-info {
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .taxon-info .taxon {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .taxon h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+        }
+
+        .taxon p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .taxon ol li span {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .concept-key {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .concept-key h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-key p {
+            margin: 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .image {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .image img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .image figcaption {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .numbered-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .numbered-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .numbered-list li a {
+            color: var(--text-color);
+        }
+
+        .numbered-list li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .comparison-table td p {
+            margin-bottom: 5px;
+        }
+
+        .diagram-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .labeled-diagram {
+            max-width: 20vw;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .diagram-container p {
+            margin: 0.3rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: end;
+            margin: 2rem 0;
+        }
+
+        .chapter-navigation a {
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .chapter-navigation a:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: var(--primary-color);
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Biology Book</h1>
+        <p>Your gateway to the world of life sciences</p>
+    </header>
+    <nav>
+        <a href="biology.html">EBook</a>
+        <a href="chlist.html">Chapters</a>
+        <a href="bques.html">Questions</a>
+        <a href="bsupplies.html">Resources</a>
+    </nav>
+
+    <main class="chapter-container">
+        <div class="chapter-sidebar">
+            <h3>Chapter Contents</h3>
+            <ul class="chapter-topics">
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#Roots">Roots</a></li>
+                <li><a href="#Stems">Stems</a></li>
+                <li><a href="#Leafs">Leafs</a></li>
+                <li><a href="#Fruits">Fruits</a></li>
+                <li><a href="#Seeds">Seeds</a></li>
+                <li><a href="#summary">Chapter Summary</a></li>
+            </ul>
+            <div class="sidebar-resources">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="bsupplies.html"></i> 3D Cell Model</a></li>
+                    <li><a href="bsupplies.html"></i> Download PDF</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chapter-content">
+            <div class="chapter-header">
+                <div class="nav">
+                    <a href="Bch2.html">Botany Chapter 2</a> > <a href="Bch3.html">Botany Chapter 3</a> > <span>Botany
+                        Chapter
+                        4</span>
+                </div>
+                <h1>The Living World</h1>
+            </div>
+
+            <section id="introduction" class="chapter-section">
+                <h2>Introduction</h2>
+                <div>
+                    <h3>Morphology</h3>
+                </div>
+                <div>
+                    <h3>Why is it important</h3>
+                </div>
+                <div>
+                    <h3>Various part of Plants</h3>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch4/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="Roots" class="chapter-section">
+                <h2>Roots</h2>
+                <div>
+                    <h3>Characteristics</h3>
+                </div>
+                <div>
+                    <h3>Kinds of Roots</h3>
+                </div>
+                <div>
+                    <h3>Region of Roots</h3>
+                </div>
+            </section>
+
+            <section id="Stems" class="chapter-section">
+                <h2>Stems</h2>
+                <div>
+                    <h3>Introduction</h3>
+                </div>
+                <div>
+                    <h3>Function</h3>
+                </div>
+            </section>
+            <section id="Leafs" class="chapter-section">
+                <h2>Leaf</h2>
+                <div>
+                    <h3>Introduction</h3>
+                </div>
+                <div>
+                    <h3>Parts of leaf</h3>
+                </div>
+                <div>
+                    <h3>Venation</h3>
+                </div>
+                <div>
+                    <h3>Typesof leaves</h3>
+                </div>
+                <div>
+                    <h3>Phyllotaxy</h3>
+                </div>
+                <div>
+                    <h3>Modification of leaves</h3>
+                    <div class="comparison-table">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <h3>Inflorescence</h3>
+                </div>
+            </section>
+            <section id="Flowers" class="chapter-section">
+                <h2>Flowers</h2>
+                <div>
+                    <h3>Introduction</h3>
+                </div>
+                <div>
+                    <h3>Structure of Flowers</h3>
+                </div>
+                <div>
+                    <h3>Symmetry of Flowers</h3>
+                </div>
+                <div>
+                    <h3>Kinds according to Position Calyx, Corolla and Androceium w.r.t Gynoecium</h3>
+                </div>
+                <div>
+                    <h3>Parts of Flowers</h3>
+                    <p></p>
+                    <ul class="numbered-list">
+                        <li>Calyx</li>
+                        <li>Corolla</li>
+                        <li>Androecium</li>
+                        <li>Gynoecium</li>
+                    </ul>
+                    <h4>Calyx</h4>
+                    <p></p>
+                    <h4>Corolla</h4>
+                    <p></p>
+                    <h4>Androecium</h4>
+
+                    <h4>Gynoecium</h4>
+
+                </div>
+                <div>
+                    <h3>Aestivation</h3>
+                    <p>Aestivation refers to the arrangement of floral parts in a flower bud before it opens. It is an
+                        important characteristic used in the classification of plants. There are several types of
+                        aestivation, including valvate, imbricate, twisted, vexillary.</p>
+                    <h4>Types of Aestivation</h4>
+                    <ul class="numbered-list">
+                        <li>Valvate: Sepals or petals are arranged in a bud without overlapping.</li>
+                        <li>Imbricate: Sepals or petals overlap each other like roof tiles.</li>
+                        <li>Twisted: Sepals or petals are twisted in a spiral arrangement.</li>
+                        <li>Vexillary: One petal is larger and encloses the others like a banner.</li>
+                    </ul>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch4/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>Placentation</h3>
+                    <p>Placentation refers to the arrangement of ovules within the ovary of a flower. It is an important
+                        characteristic used in the classification of plants. There are several types of placentation,
+                        including marginal, axile, parietal, free central, and basal.</p>
+                    <h4>Types of Placentation</h4>
+                    <ul class="numbered-list">
+                        <li>Marginal: Ovules are arranged along the margin of a single carpel.</li>
+                        <li>Axile: Ovules are arranged in a central column within a multi-carpel ovary.</li>
+                        <li>Parietal: Ovules are attached to the inner wall of a multi-carpel ovary.</li>
+                        <li>Free Central: Ovules are attached to a central column without any septa.</li>
+                        <li>Basal: Ovules are attached at the base of the ovary.</li>
+                    </ul>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch4/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+            </section>
+            <section id="Fruits" class="chapter-section">
+                <h2>Fruits</h2>
+                <p>Fruits are the mature ovaries of flowering plants, usually containing seeds. They play a crucial role
+                    in the reproduction and dispersal of plants. Fruits can be classified into various types based on
+                    their structure, development, and the number of ovaries involved.</p>
+                <h4>Types of Fruits</h4>
+                <ul class="numbered-list">
+                    <li>Simple Fruits: Develop from a single ovary of a single flower. Examples include cherries,
+                        peaches, and tomatoes.</li>
+                    <li>Aggregate Fruits: Form from multiple ovaries of a single flower. Examples include raspberries
+                        and blackberries.</li>
+                    <li>Multiple Fruits: Develop from the ovaries of multiple flowers growing in a cluster. Examples
+                        include pineapples and figs.</li>
+                </ul>
+                <div class="diagram-container">
+                    <img src="bioimg/Bch4/" alt="@" class="labeled-diagram">
+                    <p>@</p>
+                </div>
+            </section>
+            <section id="Seeds" class="chapter-section">
+                <h2>Seeds</h2>
+                <p>Seeds are the reproductive structures in flowering plants that contain the embryo and the necessary
+                    nutrients for its development. They are formed from the fertilized ovule and play a crucial role in
+                    the plant's life cycle. Seeds can vary greatly in size, shape, and structure, depending on the
+                    species.</p>
+                <h4>Structure of Seeds</h4>
+                <p>A typical seed consists of three main parts:</p>
+                <ul>
+                    <li>Seed Coat: The outer protective layer that surrounds the seed.</li>
+                    <li>Embryo: The young plant that develops from the fertilized ovule.</li>
+                    <li>Endosperm: The tissue that provides nourishment to the developing embryo.</li>
+                </ul>
+                <div>
+                    <h3>Structure of Dicotyledonous seeds</h3>
+                </div>
+                <div>
+                    <h3>Structure of Monocotyledonous seeds</h3>
+                </div>
+            </section>
+            <section id="summary" class="chapter-section">
+                <h2>Chapter Summary</h2>
+                <p>The living world is highly diverse, consisting of millions of species of plants, animals, and
+                    microorganisms. Living organisms show common characteristics such as growth, reproduction,
+                    metabolism, response to stimuli, cellular organization, and the ability to adapt and evolve. To
+                    study this vast diversity, classification and naming of organisms are essential. Scientific
+                    naming
+                    follows binomial nomenclature (Genus + Species) introduced by Linnaeus. The systematic
+                    arrangement
+                    of organisms into groups based on similarities and differences is called taxonomy, while
+                    systematics
+                    also considers evolutionary relationships. The taxonomic hierarchy includes ranks like kingdom,
+                    phylum, class, order, family, genus, and species. Various taxonomic aids like herbaria, museums,
+                    botanical gardens, zoological parks, and keys help in identification and classification of
+                    organisms.</p>
+            </section>
+            <div class="chapter-navigation">
+                <a href="Bch5.html">Next Chapter →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Biology Book.
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Kingdom</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #388e3c;
+            --text-color: #333;
+            --light-text: #ffffff;
+            --hover-text: #b8eca9;
+            --bg-color: #edebeb;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(102, 234, 76, 0.601);
+            --secondary-shadow: 0px 3px 12px 2px rgba(97, 216, 74, 0.508);
+            --hover-shadow: 0px 9px 16px rgba(97, 216, 74, 0.508);
+            --border-radius: 20px;
+            --secondary-border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hover-text);
+        }
+
+        /* Chapter-specific styles */
+        .chapter-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            gap: 2rem;
+        }
+
+        .chapter-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 10px;
+            align-self: flex-start;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .chapter-sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+
+        .chapter-topics {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-topics li {
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-topics a {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-topics a:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        .chapter-topics a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-resources {
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .sidebar-resources h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-resources ul {
+            list-style: none;
+        }
+
+        .sidebar-resources li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-resources a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .sidebar-resources a:hover {
+            color: var(--primary-color);
+        }
+
+        .chapter-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            color: var(--text-color);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav span {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .chapter-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chapter-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .chapter-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .phyla-info {
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .phyla-info .phyla {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .phyla h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.45rem;
+        }
+
+        .phyla b {
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .phyla b::before {
+            content: '';
+            margin-right: 0.35rem;
+        }
+
+        .phyla p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .phyla ol li span {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .concept-key {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .concept-key h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .image {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .image img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .image figcaption {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .numbered-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .numbered-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .numbered-list li a {
+            color: var(--text-color);
+        }
+
+        .numbered-list li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .comparison-table td p {
+            margin-bottom: 5px;
+        }
+
+        .diagram-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .labeled-diagram {
+            max-width: 20vw;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .diagram-container p {
+            margin: 0.3rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: end;
+            margin: 2rem 0;
+        }
+
+        .chapter-navigation a {
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .chapter-navigation a:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: var(--primary-color);
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Biology Book</h1>
+        <p>Your gateway to the world of life sciences</p>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="biology.html">EBook</a>
+        <a href="chlist.html">Chapters</a>
+        <a href="bques.html">Questions</a>
+        <a href="bsupplies.html">Resources</a>
+    </nav>
+
+    <main class="chapter-container">
+        <div class="chapter-sidebar">
+            <h3>Chapter Contents</h3>
+            <ul class="chapter-topics">
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#Animal Kingdom">Animal Kingdom</a></li>
+                <li><a href="#Bases of Classification">Bases of Classification</a></li>
+                <li><a href="#Classification of Animals">Classification of Animals</a></li>
+                <li><a href="#summary">Chapter Summary</a></li>
+            </ul>
+            <div class="sidebar-resources">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="bsupplies.html"></i> 3D Cell Model</a></li>
+                    <li><a href="bsupplies.html"></i> Download PDF</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chapter-content">
+            <div class="chapter-header">
+                <div class="nav">
+                    <a href="biology.html">EBook</a> > <a href="chlist.html">Chapters</a> > <span>Zoology
+                        1</span>
+                </div>
+                <h1>Animal Kingdom</h1>
+            </div>
+
+            <section id="introduction" class="chapter-section">
+                <h2>Introduction to Animal Kingdom</h2>
+                <p>The <b>Animal Kingdom (Kingdom Animalia)</b> includes <i>all multicellular, eukaryotic, heterotrophic
+                        organisms</i>. Animals cannot prepare their own food and thus depend on other organisms. They
+                    show <b>great diversity</b> in <i>structure, habitat, and functions.</i></p>
+
+                <div class="concept-key">
+                    <h4>Key Concept</h4>
+                    <p>Animals are classified into various groups based on their characteristics and evolutionary
+                        history.</p>
+                </div>
+
+                <figure class="image">
+                    <img src="../images/cell-types.jpg" alt="Comparison of different cell types">
+                    <figcaption>Figure 1.1: </figcaption>
+                </figure>
+            </section>
+
+            <section id="Animal Kingdom" class="chapter-section">
+                <h2>Animal Kingdom</h2>
+                <p>The cell theory is one of the fundamental principles of biology. It consists of three main
+                    components:</p>
+
+                <ol class="numbered-list">
+                    <li>All living organisms are composed of one or more cells.</li>
+                    <li>The cell is the basic unit of structure and organization in organisms.</li>
+                    <li>All cells come from pre-existing cells.</li>
+                </ol>
+
+            </section>
+
+            <section id="Bases of Classification" class="chapter-section">
+                <h2>Bases of Classification</h2>
+                <p>Prokaryotic cells are simpler and smaller than eukaryotic cells. They lack a nucleus and
+                    membrane-bound organelles. Bacteria and archaea are prokaryotic organisms.</p>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Bases of Classification</th>
+                                <th>Feature</th>
+                                <th>Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h4>Level of Organization</h4>
+                                </td>
+                                <td>
+                                    <b>Cellular</b>
+                                    <p>Only Cell are present.</p>
+                                    <b>Tissue</b>
+                                    <p>Group of similar cells organised to perform a specific function.</p>
+                                    <b>Organ</b>
+                                    <p>Tissue are organized to form an organ.</p>
+                                    <b>Organ-System</b>
+                                    <p>Organ are organized to form organ system.</p>
+                                </td>
+                                <td>
+                                    <p>– Porifera (Cellular)</p>
+                                    <p>– Coelentrata, Ctenofera (Tissue)</p>
+                                    <p>– Platyhelminthes (Organ)</p>
+                                    <p>– From Acshelminthes upto Chordata (Organ-System)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Symmetry</h4>
+                                </td>
+                                <td>
+                                    <b>Asymmetrical</b>
+                                    <p>Body can't be divided into equal halves passing through center.</p>
+                                    <b>Radially symmetrical</b>
+                                    <p>Body can be divided into equal halves passing through any plane that passes
+                                        through center.</p>
+                                    <b>Bilaterally symmetrical</b>
+                                    <p>Body can be divided into equal halves passing through only one plane through
+                                        center.</p>
+                                </td>
+                                <td>
+                                    <p>– Mostely Porifera e.g sponge (Asymmetrical)</p>
+                                    <p>– Coelentrata, Ctenofera and Adult Echinodermeta (Radially symmetrical)</p>
+                                    <p>– Platyhelminthes upto Chordata (Bilaterally symmetrical)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Body Plan (Not in NCERT directly)</h4>
+                                </td>
+                                <td>
+                                    <b>Cellulae aggregation</b>
+                                    <p>Only cell are diffused in body.</p>
+                                    <b>Blind sac</b>
+                                    <p>Body has only one opening for entry and exist of substance.</p>
+                                    <b>Tube within tube</b>
+                                    <p>2 seperta opening are persent, one acting as amouth and another like a anus.</p>
+                                </td>
+                                <td>
+                                    <p>– Porifera (Cellulae aggregation)</p>
+                                    <p>– Coelentrata, Ctenofera and Platyhelminthes (Blind sac)</p>
+                                    <p>– Acshelminthes upto Chordata (Tube within tube)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Grem Layer</h4>
+                                </td>
+                                <td>
+                                    <b>Diploblastic</b>
+                                    <p>Animals in which only 2 germ layers: Ectoderm and Endoderm are found. A
+                                        non-cellular MESOGLEA is present between them.</p>
+                                    <b>triploblastic</b>
+                                    <p>Animals in which only 3 germ layers: Ectoderm, Endoderm and Mesoderm are found.
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>– Coelentrata, Ctenofera (Diploblastic)</p>
+                                    <p>– Platyhelminthes upto Chordata (Triploblastic)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Coelom</h4>
+                                </td>
+                                <td>
+                                    <b>Eucoelomate (True Coelom)</b>
+                                    <p>The body cavity which is lined by Mesoderm on the both sides.</p>
+                                    <b>Pseudocoelomate (False Coelom)</b>
+                                    <p>Mesoder is present as scattered pouches between ectoderm and endoderm.</p>
+                                    <b>Acoelomate (No Coelom)</b>
+                                    <p>The body cavity is absent.</p>
+                                </td>
+                                <td>
+                                    <p>– Porifera, Coelentrata, Ctenofera and Platyhelminthes (Eucoelomate)</p>
+                                    <p>– Acshelminthes (Pseudocoelomate)</p>
+                                    <p>– Annelida upto Chordata (Acoelomate)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Metameric Segmentation</h4>
+                                </td>
+                                <td>
+                                    <p>Body can be divided externally, internally with serial repetion of at least some
+                                        organs is known as 'METAMERISM'.</p>
+                                </td>
+                                <td>
+                                    <p>– Annelida, Arthopoda and Chordata</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Notochord</h4>
+                                </td>
+                                <td>
+                                    <p>A supporting mesodermally derived structure present Dorsally.</p>
+                                </td>
+                                <td>
+                                    <p>– only in Chordata</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Digestive system</h4>
+                                </td>
+                                <td>
+                                    <b>Complete</b>
+                                    <p>2 opening present in alimentary canal.</p>
+                                    <b>Incomplete</b>
+                                    <p>Only one opening present in alimentary canal.</p>
+                                </td>
+                                <td>
+                                    <p>– Acshelminthes upto Chordata (Complete)</p>
+                                    <p>– Coelentrata upto Platyhelminthes (Complete)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Respiratory system</h4>
+                                </td>
+                                <td>
+                                    <p>It helps in Respiration in animals</p>
+                                </td>
+                                <td>
+                                    <p>– Arthopoda upto Chordata</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Circulation system</h4>
+                                </td>
+                                <td>
+                                    <b>Open</b>
+                                    <p>Blood vessels not bounded by capillary.</p>
+                                    <b>closed</b>
+                                    <p>Blood vessels bounded by capillary.</p>
+                                </td>
+                                <td>
+                                    <p>– Arthopoda, Non-cephalopod Mollusca, Tunicata, Hemichordata and Echinodermeta
+                                        (Open)
+                                    </p>
+                                    <p>– Chordata (Closed)
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="diagram-container">
+                    <h4>Prokaryotic Cell Structure</h4>
+                    <img src="../images/prokaryotic-cell.jpg" alt="Prokaryotic cell diagram" class="labeled-diagram">
+                </div>
+            </section>
+
+            <section id="Classification of Animals" class="chapter-section">
+                <h2>Classification of Animals</h2>
+                <p>On the bases of <i>Similairty and Disimilairty</i> between every animals in Animal Kingdom, they are
+                    divide into <b>11 Phylams</b>. They are listed bellow :-</p>
+
+                <ol class="numbered-list">
+                    <li><a href="#Porifera">Porifera</a></li>
+                    <li><a href="#Coelentrata">Colentrata</a></li>
+                    <li><a href="#Ctenofera">Ctenophora</a></li>
+                    <li><a href="#Platyhelminthes">Platyhelminthes</a></li>
+                    <li><a href="#Ascehelmintes">Ascehelminties</a></li>
+                    <li><a href="#Annelida">Annelida</a></li>
+                    <li><a href="#Arthopoda">Arthopoda</a></li>
+                    <li><a href="#Mollusa">Mollusa</a></li>
+                    <li><a href="#Echinodermata">Echinodermata</a></li>
+                    <li><a href="#Hemichordata">Hemichordata</a></li>
+                    <li><a href="#Chordata">Chordata</a></li>
+                </ol>
+
+                <div class="phyla-info">
+                    <div id="Porifera" class="phyla">
+                        <h3>Porifera</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> All are aquatic. (mostly marine)</li>
+                            <li><span>Level of Organization:</span> Cellular level of organization.</li>
+                            <li><span>Symmetry:</span> Asymmetrical.</li>
+                            <li><span>Germ layer:</span> Diploblastic (two germ layers).</li>
+                            <li><span>Body plan:</span> Cellular aggregation with a porous body.</li>
+                            <li><span>Coelom:</span> Acoelomate (no body cavity).</li>
+                            <li><span>Metamerism:</span> Absent.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Intracellular digestion.</li>
+                            <li><span>Respiratory System:</span> Absent</li>
+                            <li><span>Circulatory System:</span> Absent</li>
+                            <li><span>Excretory System:</span> Absent</li>
+                            <li><span>Reproduction:</span> Asexual (by Fragmentation) and sexual reproduction.</li>
+                            <li><span>Fertilisation:</span> Internal</li>
+                            <li><span>Development:</span> Indirect (via larval stage)</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p>1. These are SESSILE animals which means they are attached by Ocean floor</p>
+                            <p>2. The body is supported by SKELETON made of spongin fibres, SPICULES (Calcium or
+                                silicon)</p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p>1. Sycon (a type of sponge)</p>
+                            <p>2. Spongilla (freshwater sponge)</p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="porifera.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Coelentrata" class="phyla">
+                        <h3>Coelentrata</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Aquatic (mostly marine, some freshwater both Sessile or
+                                free-swimming).</li>
+                            <li><span>Level of Organization:</span> Tissue level of organization.</li>
+                            <li><span>Symmetry:</span> Radial symmetry.</li>
+                            <li><span>Germ layer:</span> Diploblastic (two germ layers).</li>
+                            <li><span>Body plan:</span> Blind sac (with a central gastrovascular cavity).</li>
+                            <li><span>Coelom:</span> Acoelomate (no body cavity).</li>
+                            <li><span>Metamerism:</span> Absent.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Incomplete digestive system (one opsx;ening).</li>
+                            <li><span>Respiratory System:</span> Absent.</li>
+                            <li><span>Circulatory System:</span> Absent.</li>
+                            <li><span>Excretory System:</span> Absent.</li>
+                            <li><span>Reproduction:</span> Asexual (by budding) and sexual reproduction.</li>
+                            <li><span>Fertilisation:</span> External.</li>
+                            <li><span>Development:</span> Indirect (via larval stage).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="coelentrata.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Ctenofera" class="phyla">
+                        <h3>Ctenofera</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Marine environments.</li>
+                            <li><span>Level of Organization:</span> Tissue level of organization.</li>
+                            <li><span>Symmetry:</span> Radial symmetry.</li>
+                            <li><span>Germ layer:</span> Diploblastic (two germ layers).</li>
+                            <li><span>Body plan:</span> Comb-like rows of cilia.</li>
+                            <li><span>Coelom:</span> Acoelomate (no body cavity).</li>
+                            <li><span>Metamerism:</span> Absent.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Incomplete digestive system (one opening).</li>
+                            <li><span>Respiratory System:</span> Absent.</li>
+                            <li><span>Circulatory System:</span> Absent.</li>
+                            <li><span>Excretory System:</span> Absent.</li>
+                            <li><span>Reproduction:</span> Asexual (by budding) and sexual reproduction.</li>
+                            <li><span>Fertilisation:</span> External.</li>
+                            <li><span>Development:</span> Indirect (via larval stage).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="ctenofera.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Platyhelminthes" class="phyla">
+                        <h3>Platyhelminthes</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Marine environments.</li>
+                            <li><span>Level of Organization:</span> Tissue level of organization.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ layers).</li>
+                            <li><span>Body plan:</span> Flat, ribbon-like body.</li>
+                            <li><span>Coelom:</span> Acoelomate (no body cavity).</li>
+                            <li><span>Metamerism:</span> Absent.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Incomplete digestive system (one opening).</li>
+                            <li><span>Respiratory System:</span> Absent.</li>
+                            <li><span>Circulatory System:</span> Absent.</li>
+                            <li><span>Excretory System:</span> Absent.</li>
+                            <li><span>Reproduction:</span> Asexual (by budding) and sexual reproduction.</li>
+                            <li><span>Fertilisation:</span> External.</li>
+                            <li><span>Development:</span> Indirect (via larval stage).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/platyhelmintes.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Ascehelmintes" class="phyla">
+                        <h3>Ascehelmintes</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Marine environments.</li>
+                            <li><span>Level of Organization:</span> Tissue level of organization.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ layers).</li>
+                            <li><span>Body plan:</span> Cylindrical body.</li>
+                            <li><span>Coelom:</span> Pseudocoelomate (body cavity present but not lined with
+                                mesoderm).</li>
+                            <li><span>Metamerism:</span> Absent.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Incomplete digestive system (one opening).
+                            </li>
+                            <li><span>Respiratory System:</span> Absent.</li>
+                            <li><span>Circulatory System:</span> Absent.</li>
+                            <li><span>Excretory System:</span> Absent.</li>
+                            <li><span>Reproduction:</span> Asexual (by budding) and sexual reproduction.
+                            </li>
+                            <li><span>Fertilisation:</span> External.</li>
+                            <li><span>Development:</span> Indirect (via larval stage).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/aschelminthes.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Annelida" class="phyla">
+                        <h3>Annelida</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Marine, freshwater, and terrestrial environments.
+                            </li>
+                            <li><span>Level of Organization:</span> Organ system level of organization.
+                            </li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ layers).</li>
+                            <li><span>Body plan:</span> Segmented body plan.</li>
+                            <li><span>Coelom:</span> Coelomate (true body cavity lined with mesoderm).
+                            </li>
+                            <li><span>Metamerism:</span> Present.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Complete digestive system (mouth and
+                                anus).</li>
+                            <li><span>Respiratory System:</span> Gills or lungs (depending on habitat).
+                            </li>
+                            <li><span>Circulatory System:</span> Closed circulatory system (blood
+                                vessels present).</li>
+                            <li><span>Excretory System:</span> Nephridia (excretory organs) present.
+                            </li>
+                            <li><span>Reproduction:</span> Asexual (by budding) and sexual reproduction.
+                            </li>
+                            <li><span>Fertilisation:</span> External.</li>
+                            <li><span>Development:</span> Indirect (via larval stage).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/annelida.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Arthopoda" class="phyla">
+                        <h3>Arthopoda</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Terrestrial and aquatic environments.</li>
+                            <li><span>Level of Organization:</span> Organ system level of
+                                organization.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ layers).</li>
+                            <li><span>Body plan:</span> Segmented body plan.</li>
+                            <li><span>Coelom:</span> Coelomate (true body cavity lined with
+                                mesoderm).</li>
+                            <li><span>Metamerism:</span> Present.</li>
+                            <li><span>Notochord:</span> Absent.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Complete digestive system (mouth and
+                                anus).</li>
+                            <li><span>Respiratory System:</span> Gills or lungs (depending on
+                                habitat).</li>
+                            <li><span>Circulatory System:</span> Open circulatory system (hemolymph
+                                present).</li>
+                            <li><span>Excretory System:</span> Malpighian tubules (excretory organs)
+                                present.</li>
+                            <li><span>Reproduction:</span> Sexual reproduction (most species).
+                                Asexual reproduction (some species).</li>
+                            <li><span>Fertilisation:</span> Internal (most species) or external
+                                (some species).</li>
+                            <li><span>Development:</span> Direct or indirect (larval stage)
+                                development.</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/arthropoda.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Mollusa" class="phyla">
+                        <h3>Mollusa</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Terrestrial and aquatic environments.</li>
+                            <li><span>Level of Organization:</span> Organ system level of
+                                organization.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ layers).</li>
+                            <li><span>Body plan:</span> Segmented body plan.</li>
+                            <li><span>Coelom:</span> Coelomate (true body cavity lined with
+                                mesoderm).</li>
+                            <li><span>Metamerism:</span> Present (segmentation).</li>
+                            <li><span>Notochord:</span> Absent in adults.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Complete digestive system (mouth
+                                and anus).</li>
+                            <li><span>Respiratory System:</span> Gills or lungs (depending on
+                                habitat).</li>
+                            <li><span>Circulatory System:</span> Open circulatory system
+                                (hemolymph present).</li>
+                            <li><span>Excretory System:</span> Malpighian tubules (excretory
+                                organs) present.</li>
+                            <li><span>Reproduction:</span> Sexual reproduction (most species).
+                                Asexual reproduction (some species).</li>
+                            <li><span>Fertilisation:</span> Internal (most species) or external
+                                (some species).</li>
+                            <li><span>Development:</span> Direct or indirect (larval stage)
+                                development.</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/mollusca.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Echinodermata" class="phyla">
+                        <h3>Echinodermata</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li>Habitat: </li>
+                            <li><span>Level of Organization:</span> Organ system level of
+                                organization.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ layers).
+                            </li>
+                            <li><span>Body plan:</span> Segmented body plan.</li>
+                            <li><span>Coelom:</span> Coelomate (true body cavity lined with
+                                mesoderm).</li>
+                            <li><span>Metamerism:</span> Present (segmentation).</li>
+                            <li><span>Notochord:</span> Absent in adults.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Complete digestive system
+                                (mouth and anus).</li>
+                            <li><span>Respiratory System:</span> Gills or lungs (depending
+                                on habitat).</li>
+                            <li><span>Circulatory System:</span> Open circulatory system
+                                (hemolymph present).</li>
+                            <li><span>Excretory System:</span> Malpighian tubules (excretory
+                                organs) present.</li>
+                            <li><span>Reproduction:</span> Sexual reproduction (most
+                                species). Asexual reproduction (some species).</li>
+                            <li><span>Fertilisation:</span> Internal (most species) or
+                                external (some species).</li>
+                            <li><span>Development:</span> Direct or indirect (larval stage)
+                                development.</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/echinodermeta.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Hemichordata" class="phyla">
+                        <h3>Hemichordata</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Marine environments (mostly).</li>
+                            <li><span>Level of Organization:</span> Organ system level
+                                of organization.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ
+                                layers).</li>
+                            <li><span>Body plan:</span> Segmented body plan.</li>
+                            <li><span>Coelom:</span> Coelomate (true body cavity lined
+                                with mesoderm).</li>
+                            <li><span>Metamerism:</span> Present (segmentation evident).
+                            </li>
+                            <li><span>Notochord:</span> Present in larval stage, absent
+                                in adults.</li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Complete digestive system
+                                (mouth and anus).</li>
+                            <li><span>Respiratory System:</span> Gills or lungs
+                                (depending on habitat).</li>
+                            <li><span>Circulatory System:</span> Open circulatory system
+                                (blood not always contained in vessels).</li>
+                            <li><span>Excretory System:</span> Nephridia (excretory
+                                organs) present.</li>
+                            <li><span>Reproduction:</span> Sexual reproduction
+                                (dioecious).</li>
+                            <li><span>Fertilisation:</span> External fertilization (in
+                                water).</li>
+                            <li><span>Development:</span> Indirect development (larval
+                                stage present).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="bioimg/hemichordata.jpg" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                    <div id="Chordata" class="phyla">
+                        <h3>Chordata</h3>
+                        <b>General Characteristics</b>
+                        <ol class="numbered-list">
+                            <li><span>Habitat:</span> Aquatic and terrestrial.</li>
+                            <li><span>Level of Organization:</span> Organ system
+                                level.</li>
+                            <li><span>Symmetry:</span> Bilateral symmetry.</li>
+                            <li><span>Germ layer:</span> Triploblastic (three germ
+                                layers).</li>
+                            <li><span>Body plan:</span> Coelomate (true body
+                                cavity).</li>
+                            <li><span>Coelom:</span> Present (body cavity lined with
+                                mesoderm).</li>
+                            <li><span></span>Metamerism: Present (segmentation
+                                evident).
+                            </li>
+                            <li><span>Notochord:</span> Present (embryonic
+                                structure).
+                            </li>
+                        </ol>
+                        <b>Physiology</b>
+                        <ol class="numbered-list">
+                            <li><span>Digestive System:</span> Complete digestive
+                                tract (mouth and anus).</li>
+                            <li><span>Respiratory System:</span> Gills (in aquatic
+                                forms) or lungs (in terrestrial forms).</li>
+                            <li><span>Circulatory System:</span> Closed circulatory
+                                system (blood contained within vessels).</li>
+                            <li><span>Excretory System:</span> Kidneys (for
+                                osmoregulation and waste removal).</li>
+                            <li><span>Reproduction:</span> Sexual reproduction (most
+                                species).</li>
+                            <li><span>Fertilisation:</span> Internal or external
+                                fertilization (depending on species).</li>
+                            <li><span>Development:</span> Embryonic development
+                                (with distinct stages).</li>
+                        </ol>
+                        <div class="concept-key">
+                            <h4>Notes</h4>
+                            <p></p>
+                        </div>
+                        <div class="concept-key">
+                            <h4>Examples</h4>
+                            <p></p>
+                        </div>
+                        <div class="diagram-container">
+                            <img src="" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="summary" class="chapter-section">
+                <h2>Chapter Summary</h2>
+                <ul class="summary-points">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </section>
+            <div class="chapter-navigation">
+                <a href="Zch2.html">Next Chapter →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Biology Book.
+    </footer>
+</body>
+
+</html>

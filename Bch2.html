@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological Classification</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #388e3c;
+            --text-color: #333;
+            --light-text: #ffffff;
+            --hover-text: #b8eca9;
+            --bg-color: #edebeb;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(102, 234, 76, 0.601);
+            --secondary-shadow: 0px 3px 12px 2px rgba(97, 216, 74, 0.508);
+            --hover-shadow: 0px 9px 16px rgba(97, 216, 74, 0.508);
+            --border-radius: 20px;
+            --secondary-border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hover-text);
+        }
+
+        /* Chapter-specific styles */
+        .chapter-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            gap: 2rem;
+        }
+
+        .chapter-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 10px;
+            align-self: flex-start;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .chapter-sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+
+        .chapter-topics {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-topics li {
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-topics a {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-topics a:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        .chapter-topics a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-resources {
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .sidebar-resources h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-resources ul {
+            list-style: none;
+        }
+
+        .sidebar-resources li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-resources a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .sidebar-resources a:hover {
+            color: var(--primary-color);
+        }
+
+        .chapter-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .chapter-content p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-content h4 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            color: var(--text-color);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav span {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .chapter-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chapter-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .chapter-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .taxon-info {
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .taxon-info .taxon {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .taxon h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+        }
+
+        .taxon p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .taxon ol li span {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .concept-key {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .concept-key h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-key p {
+            margin: 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .image {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .image img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .image figcaption {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .numbered-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .numbered-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .numbered-list li span {
+            font-weight: 500;
+        }
+
+        .numbered-list li a {
+            color: var(--text-color);
+        }
+
+        .numbered-list li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .comparison-table td p {
+            margin-bottom: 5px;
+        }
+
+        .diagram-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .labeled-diagram {
+            max-width: 20vw;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .diagram-container p {
+            margin: 0.3rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: end;
+            margin: 2rem 0;
+        }
+
+        .chapter-navigation a {
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .chapter-navigation a:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: var(--primary-color);
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Biology Book</h1>
+        <p>Your gateway to the world of life sciences</p>
+    </header>
+    <nav>
+        <a href="chlist.html">EBook</a>
+        <a href="chlist.html">Chapters</a>
+        <a href="bques.html">Questions</a>
+        <a href="bsupplies.html">Resources</a>
+    </nav>
+
+    <main class="chapter-container">
+        <div class="chapter-sidebar">
+            <h3>Chapter Contents</h3>
+            <ul class="chapter-topics">
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#Kingdom Monera">Kingdom Monera</a></li>
+                <li><a href="#Kingdom Protista">Kingdom Protista</a></li>
+                <li><a href="#Kingdom Fungi">Kingdom Fungi</a></li>
+                <li><a href="#Virus">Virus, Viroid and Prions</a></li>
+                <li><a href="#summary">Chapter Summary</a></li>
+            </ul>
+            <div class="sidebar-resources">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="bsupplies.html"></i> 3D Cell Model</a></li>
+                    <li><a href="bsupplies.html"></i> Download PDF</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chapter-content">
+            <div class="chapter-header">
+                <div class="nav">
+                    <a href="chlist.html">Chapters</a> > <a href="Bch1.html"> Botany Chapter 1</a> > <span>Botany
+                        Chapter
+                        2</span>
+                </div>
+                <h1>Biological Classification</h1>
+            </div>
+
+            <section id="introduction" class="chapter-section">
+                <h2>Introduction</h2>
+                <div>
+                    <h3>Schemes of Classification</h3>
+                    <p>
+                    <h4>Earliest Classification by 'Early Men':</h4> It was <i>non-scientific</i> classification based
+                    on 'uses' of organisms.
+                    </p>
+                    <b>Example:</b>
+                    <ul class="numbered-list">
+                        <li><u>Food:</u> crops, wheat, vegetables etc</li>
+                        <li><u>Shelter:</u> teak, oak wook etc</li>
+                        <li><u>Clothing:</u> silk, cotten, wool etc</li>
+                        <li><u>Security:</u> dogs</li>
+                        <li><u>Transport:</u> horse, bull, mule etc</li>
+                        <li><u>Other:</u> medicine, gums, resins etc</li>
+                    </ul>
+                    <h4>First <i>scientific</i> classification:</h4>
+                    <p>It was proposed by <b>Aristotle</b> (384-322 BC) who classified organisms into two groups:</p>
+                    <ul class="numbered-list">
+                        <li><b>Plants:</b> Based on <i>simple Morphology characteristics</i> (like size and structure)
+                            into <i>herbs, shrubs, trees</i></li>
+                        <li><b>Animals:</b> Based on <i>presence of red blood cell and white blood cell</i> into
+                            <i>Enaima (red blooded animals)</i> and <i>Anaima (white blooded animals)</i>
+                        </li>
+                    </ul>
+                    <h4><i>Two kingdom</i> classification</h4>
+                    <p>It is given by <i>Carolus Linnaeus</i> and it's main character are <i>presence and absence of
+                            cell wall</i></p>
+                    <b>Example:</b>
+                    <ul class="numbered-list">
+                        <li><b>Plants (cell wall present):</b> Archaebacteria, Eubacteria, Chrysophytes,
+                            Dinoflagellates, Fungi, Algae, Pteridophytes, Gymnosperms, Angiosperms.</li>
+                        <li><b>Animals (cell wall absent):</b> Protozoa, insects, mammals, etc.</li>
+                    </ul>
+                    <b>Drawbacks:</b>
+                    <ul class="numbered-list">
+                        <li>This system <i>did not distinguished </i>between prokaryotic (bacteria, BGA), and eukaryotic
+                            (fungi, plants) organisms.</li>
+                        <li>It kept together unicellular (chlorella) with multicellular plants.</li>
+                        <li>It kept heterotrophic (fungi) and autotrophic (plants) organism together.</li>
+                    </ul>
+                    <div class="concept-key">
+                        <h4>Note:</h4>
+                        <p>Some organism like mycoplasma lacked cell wall but kept with bacteria in plants.</p>
+                    </div>
+                </div>
+                <div>
+                    <h3>5-Kingdom system</h3>
+                    <p>It given by <i>R.H. Whittaker</i> in 1969 and he introduced Kingdom Fungi.</p>
+                    <h4>Main criteria were:</h4>
+                    <ol class="numbered-list">
+                        <li><b>Cell structure:</b> Prokaryotic and Eukaryotic</li>
+                        <li><b>Body organization:</b> Cellular, multicellular, loose tissue, tissue, organ, organ
+                            system.</li>
+                        <li><b>Mode of Nutrition:</b> Autotrophic and Heterotrophic</li>
+                        <li><b>Reproduction:</b> Asexual and Sexual</li>
+                        <li><b>Phylogentic relationships:</b> Evolutionary relationships.
+                        </li>
+                    </ol>
+                </div>
+                <div>
+                    <h3>Name of Kingdom</h3>
+                    <p>
+                        In the 5-Kingdom classification, kingdom divide like this:
+                    </p>
+                    <ul class="numbered-list">
+                        <li>Kingdom Monera</li>
+                        <li>Kingdom Protista</li>
+                        <li>Kingdom Fungi</li>
+                        <li>Kingdom Plantae</li>
+                        <li>Kingdom Animalia</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Characteristics</th>
+                                <th style="text-align: center;" colspan="5">Five Kingdom</th>
+
+                            </tr>
+                            <tr>
+                                <th>Monera</th>
+                                <th>Protista</th>
+                                <th>Fungi</th>
+                                <th>Plantae</th>
+                                <th>Animalia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h4>Cell type</h4>
+                                </td>
+                                <td>
+                                    Prokaryotic
+                                </td>
+                                <td>
+                                    Eukaryotic
+                                </td>
+                                <td>
+                                    Eukaryotic
+                                </td>
+                                <td>
+                                    Eukaryotic
+                                </td>
+                                <td>
+                                    Eukaryotic
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Cell wall</h4>
+                                </td>
+                                <td>
+                                    Noncellular (Polysaccharide + anmino acid)
+                                </td>
+                                <td>
+                                    Present in some
+                                </td>
+                                <td>
+                                    Present with chitin
+                                </td>
+                                <td>
+                                    Present (cellulose)
+                                </td>
+                                <td>
+                                    Absent
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Nuclear membrane</h4>
+                                </td>
+                                <td>
+                                    Absent
+                                </td>
+                                <td>
+                                    Present
+                                </td>
+                                <td>
+                                    Present
+                                </td>
+                                <td>
+                                    Present
+                                </td>
+                                <td>
+                                    Present
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Body organization</h4>
+                                </td>
+                                <td>
+                                    Cellular
+                                </td>
+                                <td>
+                                    Cellular
+                                </td>
+                                <td>
+                                    Multicellular / loose tissue
+                                </td>
+                                <td>
+                                    Tissue / Organ
+                                </td>
+                                <td>
+                                    Tissue / Organ / Organ system
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Mode of nutrition</h4>
+                                </td>
+                                <td>
+                                    Autotrophic (chemosynthesis and photosynthesis) and Heterotrophic
+                                    (saprophytic/heterotrophic)
+                                </td>
+                                <td>
+                                    Autotrophic (photosynthesis) and Heterotrophic
+                                </td>
+                                <td>
+                                    Heterotrophic (saprophytic/heterotrophic)
+                                </td>
+                                <td>
+                                    Autotrophic (photosynthesis)
+                                </td>
+                                <td>
+                                    Heterotrophic (holozoic/saprophytic)
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 style="text-align: center; margin-top: 1rem;">Characteristics of the Five Kingdom</h4>
+                </div>
+            </section>
+
+            <section id="Kingdom Monera" class="chapter-section">
+                <h2>Kingdom Monera</h2>
+
+                <div>
+                    <h3>Characteristics</h3>
+                    <ul class="numbered-list">
+                        <li>
+                            <i>Bacteria</i> are their sole (main) members.
+                        </li>
+                        <li>
+                            Bactria are the most abundant and <i>cosmopolitan</i> (present everywhere) organism.
+                        </li>
+                        <li>
+                            Hundred of bacteria are present in handful of soil.
+                        </li>
+                        <li>
+                            Most of the bacteria are<i> heterotrophic</i>; only a few are <i>autotrophic</i>.
+                        </li>
+                        <li>
+                            Bacteria are <i>simple</i> in <i>structure</i> and very <i>complex</i> in <i>behaviour</i>.
+                        </li>
+                        <li>
+                            Prokaryotic can do some tasks <i>like; N<sub>2</sub>-Fixation</i>.
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Shape of Bacteria</h3>
+                    <p>There are 4 shape of Bacteria:</p>
+                    <ol class="numbered-list">
+                        <li><b>Cocci</b> (round-like)</li>
+                        <li><b>Bacilli</b> (rod-like)</li>
+                        <li><b>Vibrio</b> (comma-like)</li>
+                        <li><b>Spirillum</b> (Spring-like)</li>
+                    </ol>
+                </div>
+                <div>
+                    <h3>Archaebacteria</h3>
+                    <ol class="numbered-list">
+                        <li>These bactria live in some of the most harsh habitats such as extreme salty
+                            area(halophiles), hot spring (thermoacidophiles) and mashy areas (methanogens).
+                        </li>
+                        <li>Archaebacteria differ from other bactria in having a different cell wall structure and this
+                            feature is responsible for their survival in extreme condition.</li>
+                        <div class="concept-key">
+                            <h4>Fun Fact</h4>
+                            <p>Methanogens are present in the gut of several ruminant animals such as cows and buffaloes
+                                and they are responsible for the production of methane (biogas) from the dung of these
+                                animals.</p>
+                        </div>
+                    </ol>
+
+                </div>
+                <div>
+                    <h3>Eubacteria</h3>
+                    <p>They are bacteria having rigid cell wall anf flagella (if motile)</p>
+                    <p>Based of mode of nutrition, they characterized in two parts:</p>
+                    <ol class="numbered-list">
+                        <li><span>Autotrophic</span> <br>
+                            only some bactria are Photosynthesis and chemosythetic autotrophic (like, cynobactria or
+                            blue green algae)
+                        </li>
+                        <li><span>Heterotrophic</span><br>
+                            most of bacteria rely on other's (like, lacto bacillus, vibrio chollarae)
+                        </li>
+                    </ol>
+                    <h4>Cynobactria</h4>
+                    <ul class="numbered-list">
+                        <li>Some are photosynthetic.</li>
+                        <li>They have pigment 'chl-a' similar to heigher plants.</li>
+                        <li>Some are chemosynthetic.</li>
+                        <li>They oxidise various inorganic chemicals to release energy for the formation of ATP.</li>
+                        <li>They can be unicellular, colonial (forming coloy) and filamentous (in filamentous and
+                            colonial they are surrounded by 'Gelatentous sheath' which is generlly made up of
+                            <i>collagen fibrous</i> and provide protection).
+                        </li>
+                        <li>They also find in aqautic (both fresh and marine water) and terrestial habitats.</li>
+                        <li>They form bloom in polluted water due more nutrition.</li>
+                        <li>Some Cynobactria like Anabaena, Nostac can fix nitrogen in specialised cell called
+                            <i>heterocysts</i>.
+                        </li>
+                    </ul>
+                    <h4>Heterotrophic</h4>
+                    <ul class="numbered-list">
+                        <li>Majority are decomposer i.e grow on dead and decaying matter.</li>
+                        <li>They have significant impact on human affiars : <br>
+                            <ol class="numbered-list">
+                                <li>Making <i>curd</i> from milk e.g. , Lactobacillus</li>
+                                <li>Making <i>antibiotics</i> like sterptomycin and neomycin</li>
+                                <li><i>Fixing N<sub>2</sub></i> in leguminous roots</li>
+                                <li>Some are <i>pathogenic</i> (causing diseases) to plants and animals. <br>
+                                    <b>Example:</b> Vibrio chollarae (chlorella), Salmonella typhy (typhiod),
+                                    etc.
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Reproduction in Bactria</h3>
+                    <ol class="numbered-list">
+                        <li><b>Mainly by fussion:</b> Here, a bacteria divides into 2-daughter bacteriums</li>
+                        <ul class="numbered-list">
+                            <li>Initially, the genetic material (DNA) gets replicated.</li>
+                            <li>Then, the cell is broken into 2-parts.</li>
+                        </ul>
+                        <li><b>Spore formation:</b> during <i>unfavourable</i> conditions.</li>
+                        <li><b>Sexual reproduction:</b> This is nothing but primitive type of DNA transfer from one
+                            bacterium to another.<br> Its called 'CONJUGATION' in bacteria which is not true sexual
+                            reproduction as no gamete formation and fussion takes place.</li>
+                        <ul class="numbered-list">
+                            - There are steps through which sexual reproduction happened in Bacteria:
+                            <li>First, the bacteria that have <i>'fertile plasmid'</i> is know as <i>'donor'</i> and
+                                that bacteria which recive it is <i>'recepient'</i>.</li>
+                            <li>While teansfering of fertile plasmid a <i>'sex-pili'</i>(tube-like structure) form
+                                between them.</li>
+                            <li>At the end, the both bacteria got same single strand of DNA and that's how sexual
+                                reproduction completed into bacteria.</li>
+                        </ul>
+                    </ol>
+                </div>
+                <div>
+                    <h3>Mycoplasma</h3>
+                    <ul class="numbered-list">
+                        <li>They lack rigid cell wall so they can change there shape, thus they also called
+                            <i>'Pleuomorphic'</i>
+                        </li>
+                        <li>They can live in bot areobic and non-areobic conditions.So, they are <i>'Facultive
+                                anaerobic'</i> (who can switch into areobic and non-areobic conditions).</li>
+                        <li>Many mycoplasma can <i>cause diseases in plants and animals</i>. <br>
+                            <b>Example:</b> in plants (Little-leaf, Witches broom, Phylloidy) and in animals (Pneumonia,
+                            Arthritis).
+                        </li>
+                    </ul>
+                    <div class="concept-key">
+                        <h4>Fun Facts</h4>
+                        <ul class="numbered-list">
+                            <li>The smallest living cell's length is '0.3um'</li>
+                            <li><i>PPLO</i> is also a type of mycoplasma which size is '0.1um'</li>
+                            <li>Due to mycoplasma change their shape they also know as <i>'Joker of plant kingdom'
+                                    therfore in 2-kingdom system they are considered as plants.</i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="Kingom Protista" class="chapter-section">
+                <h2>Kingom Protista</h2>
+                <ul class="numbered-list">
+                    <li>All <i>single-celled eukaryotes</i> are placed under Protista.</li>
+                    <li>Protista(s) are primarilly <i>'aqautic'</i>.</li>
+                    <li>It contain <i>'plants, animals and fungi'</i>.</li>
+                    <li>Being eukaryotes, the protistan cell body contain a well defined nucleus and membrane bounded
+                        organelles and have flagella or cillia.</li>
+                    <li>They can reproduce asexually and sexually by a process involving cell fusion and zygote
+                        formation.</li>
+                </ul>
+                <p>As a member, Protista includes:</p>
+                <ol class="numbered-list">
+                    <li>Chrysophytes</li>
+                    <li>Dinoflagellates</li>
+                    <li>Euglenoids</li>
+                    <li>Slime Moulds</li>
+                    <li>Protozoans</li>
+                </ol>
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Chrysophytes</th>
+                                <th>Dinoflagellates</th>
+                                <th>Euglenoids</th>
+                                <th>Slime Moulds</th>
+                                <th>Protozoans</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h4>Basic characters</h4>
+                                </td>
+                                <td>
+                                    Plants-like
+                                </td>
+                                <td>
+                                    2 flagella
+                                </td>
+                                <td>
+                                    connecting between plants and animals
+                                </td>
+                                <td>
+                                    fungus like
+                                </td>
+                                <td>
+                                    animals like
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Mode of nutrition</h4>
+                                </td>
+                                <td>
+                                    Photosynthesis (so diatoms are <i>cheif producer of ocean</i>)
+                                </td>
+                                <td>
+                                    Mostly photosynthetic
+                                </td>
+                                <td>
+                                    Mixotrophic (Its means they are acts like plants in presenceof light and acts like
+                                    animals in absence of light)
+                                </td>
+                                <td>
+                                    saprophytic
+                                </td>
+                                <td>
+                                    Heterotrophic and Parasitic
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Cell wall</h4>
+                                </td>
+                                <td>
+                                    Present (embedded with silica)
+                                </td>
+                                <td>
+                                    cellulosic
+                                </td>
+                                <td>
+                                    absent but they have protein rich layer called <i>Pellicle</i>
+                                </td>
+                                <td>
+                                    absent (mostly)
+                                </td>
+                                <td>
+                                    absent
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h4>Habitats</h4>
+                                </td>
+                                <td>
+                                    Fresh and marine water
+                                </td>
+                                <td>
+                                    marine water
+                                </td>
+                                <td>
+                                    Fresh and Sragnant water
+                                </td>
+                                <td>
+                                    Numerons
+                                </td>
+                                <td>
+                                    Numerons
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h4 style="text-align: center; margin-top: 1rem;">Characteristics of the Five members of Protista
+                    </h4>
+                    <div>
+                        <h3>More in Protozoans</h3>
+                        <p>
+                            Protozoans are divided into <b>four major groups</b>:
+                        </p>
+                        <ul class="numbered-list">
+                            <li>
+                                <b>Amoeboid Protozoans:</b> Found in <b>freshwater, seawater, or moist soil</b>.
+                                They move and capture food with the help of <b>pseudopodia</b>.
+                                <span class="example">Examples: Amoeba (free-living), Entamoeba (parasite).</span>
+                            </li>
+
+                            <li>
+                                <b>Flagellated Protozoans:</b> Move with the help of <b>flagella</b>.
+                                They may be <b>free-living</b> or <b>parasitic</b>.
+                                <span class="example">Example: Trypanosoma (causes sleeping sickness).</span>
+                            </li>
+
+                            <li>
+                                <b>Ciliated Protozoans:</b> <b>Aquatic and actively moving</b> with the help of
+                                <b>cilia</b>.
+                                They have a <b>gullet</b> for food intake.
+                                <span class="example">Example: Paramecium.</span>
+                            </li>
+
+                            <li>
+                                <b>Sporozoans:</b> All are <b>endoparasites</b> and have an <b>infectious spore-like
+                                    stage</b> in their life cycle.
+                                <span class="example">Example: Plasmodium (malarial parasite).</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="concept-key">
+                        <ul class="numbered-list">
+                            <li>Because of cell wall of Chrysophytes are made up of Silica, they are indestructible.So,
+                                these cell wall accumulated for billion of years and form <i>'Diatomaceous earth'</i>.
+                                this is used as polishing, filtaring oil os syrups</li>
+                            <li>In Dinoflagellates, when red dinoflagellates goes under rapid multipication they make
+                                sea appear red but due to they are toxic, in such a large number they may even kill
+                                marinecreatures around them like fishes.</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+            <section class="Kingdom Fungi">
+                <div>
+                    <h2>Kingdom Fungi</h2>
+                    <h1>Characteristics of Kingdom Fungi (NCERT Class 11)</h1>
+                    <ul class="numbered-list">
+                        <li><strong>Eukaryotic & Heterotrophic:</strong> Fungi are eukaryotic organisms, mostly
+                            heterotrophic (saprophytic, parasitic, or symbiotic).</li>
+
+                        <li><strong>Cell Wall:</strong> Their cell wall is made of <em>chitin</em> and
+                            polysaccharides.
+                        </li>
+
+                        <li><strong>Body Structure:</strong> The body consists of thread-like filaments called
+                            <em>hyphae</em>. A network of hyphae forms the <em>mycelium</em>. Hyphae may be
+                            <em>septate</em> or <em>coenocytic</em>.
+                        </li>
+
+                        <li><strong>Nutrition:</strong>
+                            <ul>
+                                <li>Saprophytic – decomposers.</li>
+                                <li>Parasitic – living on hosts.</li>
+                                <li>Symbiotic – with algae in lichens, with roots in mycorrhiza.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Life Cycle:</strong>
+                            <ul>
+                                <li><em>Plasmogamy</em> – fusion of protoplasm of two cells.</li>
+                                <li><em>Karyogamy</em> – fusion of nuclei.</li>
+                                <li><em>Meiosis</em> – occurs in zygote, producing haploid spores.</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Habitats:</strong> Fungi are cosmopolitan, found in air, water, soil, decaying
+                            matter, and as parasites.</li>
+
+                        <li><strong>Classification & Examples:</strong>
+                            <ul>
+                                <li><strong>Phycomycetes:</strong> Rhizopus, Albugo</li>
+                                <li><strong>Ascomycetes:</strong> Saccharomyces (yeast), Aspergillus, Neurospora
+                                </li>
+                                <li><strong>Basidiomycetes:</strong> Agaricus (mushroom), Puccinia</li>
+                                <li><strong>Deuteromycetes:</strong> Alternaria, Trichoderma</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <div>
+                    <h3>Reproduction in Fungi</h3>
+                    <p>Fungi can reproduce in 3 ways :</p>
+                    <ul class="numbered-list">
+                        <li>Vegetative reproduction – by fragmentation, fission, budding.</li>
+                        <li>Asexual reproduction – by spores such as conidia, sporangiospores, zoospores.
+                        </li>
+                        <li>Sexual reproduction – involves plasmogamy, karyogamy, and meiosis, producing zygospores,
+                            ascospores, or basidiospores.</li>
+                        <p>it is done in 3 steps:</p>
+                        <ol class="numbered-list">
+                            <li>Plasmogamy – fusion of protoplasm of two cells.</li>
+                            <li>Karyogamy – fusion of nuclei.</li>
+                            <li>Meiosis – occurs in zygote, producing haploid spores.</li>
+                        </ol>
+                    </ul>
+                </div>
+            </section>
+
+
+            <section id="summary" class="chapter-section">
+                <h2>Chapter Summary</h2>
+                <p>The living world is highly diverse, consisting of millions of species of plants, animals, and
+                    microorganisms. Living organisms show common characteristics such as growth, reproduction,
+                    metabolism, response to stimuli, cellular organization, and the ability to adapt and evolve. To
+                    study this vast diversity, classification and naming of organisms are essential. Scientific
+                    naming
+                    follows binomial nomenclature (Genus + Species) introduced by Linnaeus. The systematic
+                    arrangement
+                    of organisms into groups based on similarities and differences is called taxonomy, while
+                    systematics
+                    also considers evolutionary relationships. The taxonomic hierarchy includes ranks like kingdom,
+                    phylum, class, order, family, genus, and species. Various taxonomic aids like herbaria, museums,
+                    botanical gardens, zoological parks, and keys help in identification and classification of
+                    organisms.</p>
+            </section>
+            <div class="chapter-navigation">
+                <a href="Bch3.html">Next Chapter →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Biology Book.
+    </footer>
+</body>
+
+</html>

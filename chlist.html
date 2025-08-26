@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Biology Book Chapters</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #388e3c;
+            --text-color: #333;
+            --light-text: #f5f5f5;
+            --hover-text: #b8eca9;
+            --bg-color: #edebeb;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(102, 234, 76, 0.601);
+            --secondary-shadow: 0px 3px 12px 2px rgba(97, 216, 74, 0.508);
+            --hover-shadow: 0px 9px 16px rgba(97, 216, 74, 0.508);
+            --border-radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hover-text);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zoology,
+        .botany {
+            margin: 20px;
+            border: 2px solid white;
+            border-radius: var(--border-radius);
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+
+        }
+
+        .zoology .chname,
+        .botany .chname {
+            display: grid;
+            grid-template-columns: 285px 285px 285px 285px 285px;
+            grid-template-rows: 170px 170px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        .b {
+            margin: 10px;
+        }
+
+        .chname a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 640;
+            font-size: 1.1rem;
+            border-left: 3wpx solid var(--primary-color);
+            border-radius: var(--border-radius);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .chname a:hover {
+            color: var(--secondary-color);
+        }
+
+        .ch {
+            border: 2px solid white;
+            width: 265px;
+            height: 150px;
+            box-shadow: var(--secondary-shadow);
+            border-radius: var(--border-radius);
+            background: var(--card-bg);
+            color: var(--text-color);
+            transition: all 0.5s ease;
+        }
+
+        .ch:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        footer {
+
+            text-align: center;
+            padding: 18px 0;
+            background: #2e7d32;
+            color: #fff;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Biology Explorar</h1>
+        <p>Your gateway to explore the world of life sciences</p>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="biology.html">EBook</a>
+        <a href="chlist.html">Chapters</a>
+        <a href="bques.html">Questions</a>
+        <a href="bsupplies.html">Resources</a>
+    </nav>
+    <main>
+        <section class="zoology">
+            <div class="b">
+                <h2>Zoology</h2>
+                <div class="chname">
+                    <div class="ch1 ch"><a href="Zch1.html">Animal Kingdom</a></div>
+                    <div class="ch2 ch"><a href="Zch2.html">Structural Organisation of Animals</a></div>
+                    <div class="ch3 ch"><a href="Zch3.html">Biomolecules</a></div>
+                    <div class="ch4 ch"><a href="Zch4.html">&nbsp; Breathing and Exchange of Gases</a></div>
+                    <div class="ch5 ch"><a href="Zch5.html">Body Fluids and Circulation</a></div>
+                    <div class="ch6 ch"><a href="Zch6.html">Excretory Products and their Elimination</a></div>
+                    <div class="ch7 ch"><a href="Zch7.html">Locomotion and Movement</a></div>
+                    <div class="ch8 ch"><a href="Zch8.html">Neural Control and Coordination</a></div>
+                    <div class="ch9 ch"><a href="Zch9.html">Chemical Coordination and Integration</a></div>
+                </div>
+            </div>
+        </section>
+        <section class="botany">
+            <div class="b">
+                <h2>Botany</h2>
+                <div class="chname">
+                    <div class="ch1 ch"><a href="Bch1.html">The Living World</a></div>
+                    <div class="ch2 ch"><a href="Bch2.html">Biological Classification</a></div>
+                    <div class="ch3 ch"><a href="Bch3.html">Plant Kingdom</a></div>
+                    <div class="ch4 ch"><a href="Bch4.html">Morphology of Flowering Plants</a></div>
+                    <div class="ch5 ch"><a href="Bch5.html">Anatomy of Flowering Plants</a></div>
+                    <div class="ch6 ch"><a href="Bch6.html">Cell: The Unit of Life</a></div>
+                    <div class="ch7 ch"><a href="Bch7.html">Cell Cycle and Cell Division</a></div>
+                    <div class="ch8 ch"><a href="Bch8.html">Photosynthesis in Higher Plants</a></div>
+                    <div class="ch9 ch"><a href="Bch9.html">Respiration in Plants</a></div>
+                    <div class="ch10 ch"><a href="Bch10.html">Plant Growth and Development</a></div>
+                </div>
+        </section>
+        </div>
+
+    </main>
+
+    <footer>
+        &copy; 2025 Biology Book.
+    </footer>
+</body>
+
+</html>

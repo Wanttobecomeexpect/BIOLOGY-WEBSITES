@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Cycle and Cell Division</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #388e3c;
+            --text-color: #333;
+            --light-text: #ffffff;
+            --hover-text: #b8eca9;
+            --bg-color: #edebeb;
+            --card-bg: #ffffff;
+            --shadow: 0 2px 8px rgba(102, 234, 76, 0.601);
+            --secondary-shadow: 0px 3px 12px 2px rgba(97, 216, 74, 0.508);
+            --hover-shadow: 0px 9px 16px rgba(97, 216, 74, 0.508);
+            --border-radius: 20px;
+            --secondary-border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        a:hover {
+            cursor: pointer;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: var(--light-text);
+            padding: 30px 0 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+        }
+
+        nav {
+            background: var(--secondary-color);
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            margin: 0 18px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--hover-text);
+        }
+
+        /* Chapter-specific styles */
+        .chapter-container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            gap: 2rem;
+        }
+
+        .chapter-sidebar {
+            width: 280px;
+            position: sticky;
+            top: 10px;
+            align-self: flex-start;
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+
+        .chapter-sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+
+        .chapter-topics {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-topics li {
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-topics a {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .chapter-topics a:hover {
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        .chapter-topics a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .sidebar-resources {
+            background-color: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .sidebar-resources h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-resources ul {
+            list-style: none;
+        }
+
+        .sidebar-resources li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-resources a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .sidebar-resources a:hover {
+            color: var(--primary-color);
+        }
+
+        .chapter-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .chapter-content p {
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .chapter-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .nav a {
+            color: var(--text-color);
+        }
+
+        .nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav span {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .chapter-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .chapter-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .chapter-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+
+        .taxon-info {
+            padding: 1rem;
+            background-color: #f9f9f9;
+        }
+
+        .taxon-info .taxon {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .taxon h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+        }
+
+        .taxon p {
+            margin: 0.5rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .taxon ol li span {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .concept-key {
+            background-color: #e8f5e9;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .concept-key h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .concept-key p {
+            margin: 0;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .image {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .image img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+        }
+
+        .image figcaption {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .numbered-list {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .numbered-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .numbered-list li a {
+            color: var(--text-color);
+        }
+
+        .numbered-list li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .comparison-table {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .comparison-table td p {
+            margin-bottom: 5px;
+        }
+
+        .diagram-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .labeled-diagram {
+            max-width: 20vw;
+            border-radius: 4px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .diagram-container p {
+            margin: 0.3rem 0;
+            line-height: 1.5;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        .chapter-navigation {
+            display: flex;
+            justify-content: end;
+            margin: 2rem 0;
+        }
+
+        .chapter-navigation a {
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .chapter-navigation a:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--light-text);
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: var(--primary-color);
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <h1>Biology Book</h1>
+        <p>Your gateway to the world of life sciences</p>
+    </header>
+    <nav>
+        <a href="biology.html">EBook</a>
+        <a href="chlist.html">Chapters</a>
+        <a href="bques.html">Questions</a>
+        <a href="bsupplies.html">Resources</a>
+    </nav>
+
+    <main class="chapter-container">
+        <div class="chapter-sidebar">
+            <h3>Chapter Contents</h3>
+            <ul class="chapter-topics">
+                <li><a href="#introduction" class="active">Introduction</a></li>
+                <li><a href="#Cell Cycle">Cell Cycle</a></li>
+                <li><a href="#Phases">Phases of Cell Cycle</a></li>
+                <li><a href="#InterPhase">InterPhase</a></li>
+                <li><a href="#M Phase">M Phase</a></li>
+                <li><a href="#Mitosis">Mitosis</a></li>
+                <li><a href="#Meiosis">Meiosis</a></li>
+                <li><a href="#Significance">Significance</a></li>
+                <li><a href="#summary">Chapter Summary</a></li>
+            </ul>
+            <div class="sidebar-resources">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="bsupplies.html"></i> 3D Cell Model</a></li>
+                    <li><a href="bsupplies.html"></i> Download PDF</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chapter-content">
+            <div class="chapter-header">
+                <div class="nav">
+                    <a href="Bch5.html">Botany Chapter 5</a> > <a href="Bch6.html">Botany Chapter 6</a> > <span>Botany
+                        Chapter
+                        7</span>
+                </div>
+                <h1>Cell Cycle and Cell Division</h1>
+            </div>
+
+            <section id="introduction" class="chapter-section">
+                <h2>Introduction</h2>
+
+            </section>
+
+            <section id="Cell Cycle" class="chapter-section">
+                <h2>Cell Cycle</h2>
+
+            </section>
+            <section id="Phases" class="chapter-section">
+                <h2>Phases of Cell Cycle</h2>
+                <p></p>
+                <ol class="numbered-list">
+                    <li></li>
+                    <li></li>
+                </ol>
+            </section>
+            <section id="InterPhase" class="chapter-section">
+                <h2>InterPhase</h2>
+                <p>intro</p>
+                <p></p>
+                <ol class="numbered-list">
+                    <li><a href="#G1">G<sub>1</sub> Phases (Gap 1)</a></li>
+                    <li><a href="#S">S Phases (Synthesis)</a></li>
+                    <li><a href="#G2">G<sub>2</sub> Phases (Gap 2)</a></li>
+                </ol>
+                <div>
+                    <h3 id="G1">G<sub>1</sub> Phases (Gap 1)</h3>
+                    <p></p>
+                </div>
+                <div>
+                    <h3 id="S">S Phases (Synthesis)</h3>
+                    <p></p>
+                </div>
+                <div>
+                    <h3 id="G2">G<sub>2</sub> Phases (Gap 2)</h3>
+                    <p></p>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch7/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+            </section>
+            <section id="M Phase" class="chapter-section">
+                <h2>M Phase</h2>
+                <p>intro</p>
+                <p></p>
+                <ol class="numbered-list">
+                    <li><a href="#Karyokinesis">Karyokinesis</a></li>
+                    <li><a href="#Cytokinesis">Cytokinesis</a></li>
+                </ol>
+                <div>
+                    <h3 id="Karyokinesis">Karyokinesis</h3>
+                    <p></p>
+                    <p></p>
+                    <ol class="numbered-list">
+                        <li><a href="#prophase">Prophase</a></li>
+                        <li><a href="#metaphase">Metaphase</a></li>
+                        <li><a href="#anaphase">Anaphase</a></li>
+                        <li><a href="#telophase">Telophase</a></li>
+                    </ol>
+                    <div>
+                        <h4 id="prophase">Prophase</h4>
+                    </div>
+                    <div>
+                        <h4 id="metaphase">Metaphase</h4>
+                    </div>
+                    <div>
+                        <h4 id="anaphase">Anaphase</h4>
+                    </div>
+                    <div>
+                        <h4 id="telophase">Telophase</h4>
+                    </div>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch7/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="Cytokinesis">Cytokinesis</h3>
+                    <p></p>
+                </div>
+            </section>
+
+            <section id="Mitosis" class="chapter-section">
+                <h2>Mitosis</h2>
+                <p></p>
+            </section>
+            <section id="Meiosis" class="chapter-section">
+                <h2>Meiosis</h2>
+                <p></p>
+                <div class="concept-key">
+                    <h3>Key Features of Meiosis</h3>
+                </div>
+                <p></p>
+                <ol class="numbered-list">
+                    <li><a href="Meiosis 1">Meiosis 1</a></li>
+                    <li><a href="Meiosis 2">Meiosis 2</a></li>
+                </ol>
+                <div>
+                    <h3 id="Meiosis 1"></h3>
+                    <p></p>
+                    <ul class="numbered-list">
+                        <li><a href="pro1">Prophase I</a></li>
+                        <li><a href="meta1">Metaphase I</a></li>
+                        <li><a href="ana1">Anaphase I</a></li>
+                        <li><a href="telo1">Telophase I</a></li>
+                    </ul>
+                    <div>
+                        <h4 id="pro1">Prophase I</h4>
+                        <p></p>
+                        <ul class="numbered-list">
+                            <li><a href="lepto">Leptotene</a></li>
+                            <li><a href="zygo">Zygotene</a></li>
+                            <li><a href="pachy">Pachytene</a></li>
+                            <li><a href="diplo">Diplotene</a></li>
+                            <li><a href="diak">Diakinesis</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 id="lepto">Leptotene</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="zygo">Zygotene</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="pachy">Pachytene</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="diplo">Diplotene</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="diak">Diakinesis</h4>
+                        <p></p>
+                        <div class="diagram-container">
+                            <img src="bioimg/Bch7/" alt="@" class="labeled-diagram">
+                            <p>@</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 id="meta1">Metaphase I</h4>
+                    <p></p>
+                </div>
+                <div>
+                    <h4 id="ana1">Anaphase I</h4>
+                    <p></p>
+                </div>
+                <div>
+                    <h4 id="telo1">Telophase I</h4>
+                    <p></p>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch7/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 id="Meiosis 2"></h3>
+                    <p></p>
+                    <ul class="numbered-list">
+                        <li><a href="pro2">Prophase II</a></li>
+                        <li><a href="meta2">Metaphase II</a></li>
+                        <li><a href="ana2">Anaphase II</a></li>
+                        <li><a href="telo2">Telophase II</a></li>
+                    </ul>
+                    <div>
+                        <h4 id="pro2">Prophase II</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="meta2">Metaphase II</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="ana2">Anaphase II</h4>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h4 id="telo2">Telophase II</h4>
+                        <p></p>
+                    </div>
+                    <div class="diagram-container">
+                        <img src="bioimg/Bch7/" alt="@" class="labeled-diagram">
+                        <p>@</p>
+                    </div>
+                </div>
+            </section>
+            <section id="Significance" class="chapter-section">
+                <h2>Significance</h2>
+                <ul class="numbered-list">
+                    <li><a href="#Smitosis">Significance of Mitosis</a></li>
+                    <li><a href="#Smeiosis">Significance of Meiosis</a></li>
+                </ul>
+                <div>
+                    <h3>Significance of Mitosis</h3>
+                    <ul class="numbered-list">
+                        <li></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Significance of Meiosis</h3>
+                    <ul class="numbered-list">
+                        <li></li>
+                    </ul>
+                </div>
+            </section>
+            <section id="summary" class="chapter-section">
+                <h2>Chapter Summary</h2>
+                <p></p>
+            </section>
+            <div class="chapter-navigation">
+                <a href="Bch8.html">Next Chapter →</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 Biology Book.
+    </footer>
+</body>
+
+</html>
