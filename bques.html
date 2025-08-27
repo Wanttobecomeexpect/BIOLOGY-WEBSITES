@@ -209,33 +209,6 @@
         </section>
     </main>
 
-
-    <script>
-        document.querySelectorAll('.quiz-form').forEach(form => {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                const answer = form.dataset.answers;  // correct answer from data-answers
-                const selected = form.querySelector('input[type="radio"]:checked');
-                const resultDiv = form.querySelector('.result');
-
-                if (!selected) {
-                    resultDiv.textContent = "Please select an answer.";
-                    resultDiv.style.color = "red";
-                    return;
-                }
-
-                if (selected.value === answer) {
-                    resultDiv.textContent = "✅ Correct!";
-                    resultDiv.style.color = "green";
-                } else {
-                    resultDiv.textContent = `❌ Incorrect. Correct answer is: ${answer}`;
-                    resultDiv.style.color = "red";
-                }
-            });
-        });
-
-    </script>
 </body>
 
 </html>
