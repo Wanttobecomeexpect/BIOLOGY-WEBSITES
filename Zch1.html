@@ -387,6 +387,121 @@
             color: var(--light-text);
             margin-top: 40px;
         }
+
+        /* 📱 Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                font-size: 15px;
+                line-height: 1.5;
+            }
+
+            header {
+                padding: 20px 0 15px 0;
+            }
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+
+            nav {
+                padding: 8px 0;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 6px 10px;
+                font-size: 15px;
+            }
+
+            .chapter-container {
+                flex-direction: column;
+                width: 95%;
+                margin: 1rem auto;
+                gap: 1rem;
+            }
+
+            .chapter-sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                max-height: none;
+                overflow: visible;
+                padding: 1rem;
+            }
+
+            .chapter-sidebar h3 {
+                font-size: 18px;
+            }
+
+            .chapter-topics a {
+                padding: 0.5rem;
+                font-size: 15px;
+            }
+
+            .sidebar-resources {
+                margin-top: 1rem;
+                padding: 0.8rem;
+            }
+
+            .chapter-content {
+                width: 100%;
+                padding: 1.2rem;
+            }
+
+            .chapter-content h2 {
+                font-size: 20px;
+            }
+
+            .chapter-content h3 {
+                font-size: 18px;
+            }
+
+            .chapter-content p {
+                font-size: 15px;
+            }
+
+            .taxon h4 {
+                font-size: 16px;
+            }
+
+            .concept-key {
+                padding: 0.8rem;
+                font-size: 14px;
+            }
+
+            .image img,
+            .labeled-diagram {
+                max-width: 100%;
+            }
+
+            .comparison-table {
+                overflow-x: auto;
+            }
+
+            .comparison-table table {
+                font-size: 14px;
+            }
+
+            .chapter-navigation {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .chapter-navigation a {
+                font-size: 14px;
+                padding: 0.4rem 0.8rem;
+            }
+
+            footer {
+                font-size: 14px;
+                padding: 12px 0;
+            }
+        }
     </style>
 
 </head>
