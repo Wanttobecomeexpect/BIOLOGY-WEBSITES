@@ -114,6 +114,48 @@
             color: var(--light-text);
             margin-top: 40px;
         }
+
+        /* 📱 Responsive Design for Mobile Devices */
+        @media (max-width: 768px) {
+            main {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 8px 10px;
+                font-size: 14px;
+            }
+
+            .bb {
+                flex-direction: column;
+                /* stack instead of side-by-side */
+                align-items: center;
+            }
+
+            .b1,
+            .b2 {
+                width: 100%;
+                /* take full width */
+                max-width: 100%;
+            }
+
+            .b {
+                width: 100%;
+                height: auto;
+                /* remove fixed height */
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            header p {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
