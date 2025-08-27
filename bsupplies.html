@@ -168,6 +168,14 @@
             background-color: var(--secondary-color);
         }
 
+        footer {
+            text-align: center;
+            padding: 18px 0;
+            background: var(--primary-color);
+            color: var(--light-text);
+            margin-top: 40px;
+        }
+
         .boxes3D {
             display: flex;
             flex-wrap: wrap;
@@ -282,10 +290,163 @@
             color: var(--light-text);
             margin-top: 40px;
         }
+
+        /* 📱 Responsive Design for Phones */
+        @media (max-width: 701px) {
+
+            /* General adjustments */
+            body {
+                font-size: 14px;
+            }
+
+            header {
+                padding: 20px 10px;
+            }
+
+            header h1 {
+                font-size: 1.6rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 8px;
+            }
+
+            nav a {
+                margin: 6px 10px;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .content {
+                width: 100%;
+                padding: 1.2rem;
+            }
+
+            .content-section h2 {
+                font-size: 1.2rem;
+            }
+
+            /* 3D Boxes */
+            .boxes3D {
+                justify-content: center;
+            }
+
+            .boxes3D .box3D {
+                width: 45%;
+                height: 55px;
+            }
+
+            .boxes3D .box3D a {
+                font-size: 0.9rem;
+                line-height: 55px;
+            }
+
+            /* Book Boxes */
+            .boxesbook {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .boxbook {
+                width: 90%;
+                height: auto;
+            }
+
+            .boxbook img {
+                height: auto;
+                max-height: 200px;
+                object-fit: cover;
+            }
+
+            .boxesbook .info {
+                width: 90%;
+                margin-top: 1rem;
+                padding: 1rem;
+            }
+
+            .boxesbook .info h3 {
+                font-size: 1rem;
+            }
+
+            footer {
+                font-size: 0.85rem;
+                padding: 12px 5px;
+            }
+
+            /* Sidebar comes on top */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -250px;
+                /* hidden off-screen */
+                width: 220px;
+                height: 100%;
+                background: white;
+                box-shadow: var(--shadow);
+                border-radius: 0;
+                z-index: 1000;
+                padding: 1.5rem;
+                transition: left 0.3s ease-in-out;
+            }
+
+            /* When active → slide in */
+            .sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                background: var(--primary-color);
+                color: var(--light-text);
+                border: none;
+                font-size: 22px;
+                padding: 10px 15px;
+                cursor: pointer;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                border-radius: 0px 0px 8px 0px;
+                z-index: 1100;
+            }
+        }
+
+
+
+        /* On large devices restore normal sidebar */
+        @media (min-width: 700px) {
+            .menu-toggle {
+                display: none;
+            }
+
+            .sidebar {
+                position: sticky;
+                left: 0;
+                height: auto;
+                display: block;
+                transition: none;
+            }
+        }
     </style>
 </head>
 
 <body>
+
+
+
+    <button class="menu-toggle">☰</button>
+
     <header>
         <h1>Biology Book</h1>
         <p>Your gateway to the world of life sciences</p>
@@ -297,20 +458,22 @@
         <a href="bsupplies.html">Resources</a>
     </nav>
     <main>
+
         <div class="top">
             <h2>Resources Center</h2>
             <p>Hello! Here you can different kind of supplies which help in your studies</p>
         </div>
+
         <div class="container">
             <div class="sidebar">
                 <h3>Resources List</h3>
                 <ul class="list">
-                    <li id="3D-Diagram" class="resource-item">
+                    <li id="3D-Diagram" class="resource-item active">
                         3D Diagram
                     </li>
                     <ul class="topics">
                         <li><a href="#Zoology" class="sub">Zoology</a></li>
-                        <li> <a href="#Botany" class="sub">Botany</a></li>
+                        <li><a href="#Botany" class="sub">Botany</a></li>
                     </ul>
                     <li id="Books" class="resource-item">
                         Books
@@ -420,6 +583,14 @@
     <footer>
         &copy; 2025 Biology Book.
     </footer>
+    <script>
+        const menuToggle = document.querySelector(".menu-toggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+    </script>
 </body>
 
 </html>
